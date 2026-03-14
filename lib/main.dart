@@ -1,7 +1,21 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:fpv_fic/data/logger_interface.dart';
 
 void main() {
-  runApp(const MyApp());
+  runZonedGuarded<Future<void>>(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      final host = Uri.base.host;
+      final port = Uri.base.port;
+      logger.log('App corriendo en: http://$host:$port');
+      runApp(const MyApp());
+    },
+    (error, stackTrace) {
+      logger.logError('Uncaught error: $error', error, stackTrace);
+    },
+  );
 }
 
 class MyApp extends StatelessWidget {
