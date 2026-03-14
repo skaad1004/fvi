@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpv_fic/data/logger_interface.dart';
+import 'package:fpv_fic/ui/main/theme.dart';
 import 'package:fpv_fic/ui/providers/auth_providers.dart';
 import 'package:fpv_fic/ui/router/app_router.dart';
 
@@ -50,12 +51,7 @@ class AppFPV extends ConsumerWidget {
         return MaterialApp.router(
           title: 'FPV FIC - BTG',
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color(0xFF003087),
-            ),
-            useMaterial3: true,
-          ),
+          theme: AppThemes.lightTheme,
           routerConfig: router,
         );
       },

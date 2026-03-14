@@ -12,7 +12,7 @@ class LoginPage extends ConsumerWidget {
     final isMobile = Responsive.isMobile(context);
 
     return Scaffold(
-      body: isMobile ? const MobileLayout() : const DesktopLayout(),
+      body: isMobile ? const LoginMobileLayout() : const LoginDesktopLayout(),
     );
   }
 }

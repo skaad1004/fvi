@@ -4,8 +4,8 @@ import 'package:fpv_fic/ui/widgets/atoms/fpv_text.dart';
 import 'package:fpv_fic/ui/widgets/organisms/form_login.dart';
 
 // ─── MOBILE: logo arriba + formulario abajo ──────────────
-class MobileLayout extends StatelessWidget {
-  const MobileLayout({super.key});
+class LoginMobileLayout extends StatelessWidget {
+  const LoginMobileLayout({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -61,12 +61,20 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/login',
         name: 'login',
-        builder: (context, state) => const LoginPage(),
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          name: 'Login - BTG',
+          child: const LoginPage(),
+        ),
       ),
       GoRoute(
         path: '/home',
         name: 'home',
-        builder: (context, state) => const HomePage(),
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          name: 'Home - BTG',
+          child: const HomePage(),
+        ),
       ),
     ],
   );

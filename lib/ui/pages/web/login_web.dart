@@ -4,8 +4,8 @@ import 'package:fpv_fic/ui/widgets/atoms/fpv_text.dart';
 import 'package:fpv_fic/ui/widgets/organisms/form_login.dart';
 
 // ─── DESKTOP: panel izquierdo + formulario derecho ───────
-class DesktopLayout extends StatelessWidget {
-  const DesktopLayout({super.key});
+class LoginDesktopLayout extends StatelessWidget {
+  const LoginDesktopLayout({super.key});
 
   @override
   Widget build(BuildContext context) {
