@@ -1,0 +1,18 @@
+import 'package:fpv_fic/data/logger_interface.dart';
+import 'package:fpv_fic/domain/enity/usuario.dart';
+import 'package:fpv_fic/domain/repository/auth_repository.dart';
+
+class LoginUserUseCase {
+  final AuthRepository _repository;
+
+  LoginUserUseCase(this._repository);
+
+  UsuarioModel call(String email, String password) {
+    try {
+      return _repository.login(email, password);
+    } catch (e) {
+      logger.logError('Error en LoginUserUseCase: $e');
+      return UsuarioModel.empty();
+    }
+  }
+}
