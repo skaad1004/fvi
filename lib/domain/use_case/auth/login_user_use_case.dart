@@ -7,12 +7,12 @@ class LoginUserUseCase {
 
   LoginUserUseCase(this._repository);
 
-  UsuarioModel call(String email, String password) {
+  Future<(UsuarioModel, String?)> call(String email, String password) async {
     try {
-      return _repository.login(email, password);
+      return await _repository.login(email, password);
     } catch (e) {
       logger.logError('Error en LoginUserUseCase: $e');
-      return UsuarioModel.empty();
+      return (UsuarioModel.empty(), 'Error al iniciar sesión');
     }
   }
 }

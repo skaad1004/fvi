@@ -36,12 +36,16 @@ class AuthController extends StateNotifier<AuthState> {
        _logoutUseCase = logoutUseCase,
        super(AuthState(usuario: UsuarioModel.empty()));
 
-  void login(String email, String password) {
+  Future<void> login(String email, String password) async {
     state = state.copyWith(isLoading: true, error: '');
 
     try {
-      final usuario = _loginUseCase(email, password);
-      state = state.copyWith(usuario: usuario, isLoading: false);
+      final (usuario, error) = await _loginUseCase(email, password);
+      state = state.copyWith(
+        usuario: usuario,
+        error: error ?? '',
+        isLoading: false,
+      );
     } catch (e) {
       state = state.copyWith(
         error: 'Error al iniciar sesión',
