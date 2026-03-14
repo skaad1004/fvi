@@ -3,8 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpv_fic/data/logger_interface.dart';
-import 'package:fpv_fic/ui/pages/login.dart';
+import 'package:fpv_fic/ui/providers/auth_providers.dart';
 import 'package:fpv_fic/ui/router/app_router.dart';
+
+final sessionRestoredProvider = FutureProvider<bool>((ref) async {
+  logger.log('🚀 sessionRestoredProvider iniciado');
+  await ref.read(authControllerProvider.notifier).restoreSession();
+  return true;
+});
 
 void main() {
   runZonedGuarded<Future<void>>(
@@ -26,15 +32,33 @@ class AppFPV extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final router = ref.watch(appRouterProvider);
-    return MaterialApp.router(
-      title: 'FPV FIC - BTG',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF003087)),
-        useMaterial3: true,
+    final restored = ref.watch(sessionRestoredProvider);
+
+    return restored.when(
+      loading: () => const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(body: Center(child: CircularProgressIndicator())),
       ),
-      routerConfig: router,
+      error: (e, _) {
+        logger.logError('❌ Error restaurando sesión: $e', e);
+        return const MaterialApp(
+          home: Scaffold(body: Center(child: Text('Error al iniciar'))),
+        );
+      },
+      data: (_) {
+        final router = ref.watch(appRouterProvider);
+        return MaterialApp.router(
+          title: 'FPV FIC - BTG',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color(0xFF003087),
+            ),
+            useMaterial3: true,
+          ),
+          routerConfig: router,
+        );
+      },
     );
   }
 }

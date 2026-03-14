@@ -4,4 +4,5 @@ abstract class AuthRepository {
   Future<(UsuarioModel, String?)> login(String email, String password);
   void logout();
   UsuarioModel getUsuarioActivo();
+  UsuarioModel getUsuarioById(String id);
 }

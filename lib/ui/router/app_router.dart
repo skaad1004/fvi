@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpv_fic/ui/pages/home.dart';
 import 'package:fpv_fic/ui/pages/login.dart';
+import 'package:fpv_fic/ui/pages/splash.dart';
 import 'package:fpv_fic/ui/providers/auth_providers.dart';
 import 'package:go_router/go_router.dart';
 
@@ -23,11 +24,17 @@ class RouterNotifier extends Notifier<void> implements Listenable {
   }
 
   String? redirect(BuildContext context, GoRouterState routerState) {
-    final isAuthenticated = ref.read(authControllerProvider).isAuthenticated;
-    final isLoginPage = routerState.matchedLocation == '/login';
+    // final isAuthenticated = ref.read(authControllerProvider).isAuthenticated;
+    final authState = ref.read(authControllerProvider);
+    final isAuthenticated = authState.isAuthenticated;
+    final location = routerState.matchedLocation;
 
-    if (!isAuthenticated && !isLoginPage) return '/login';
-    if (isAuthenticated && isLoginPage) return '/home';
+    if (!isAuthenticated && location != '/login') return '/login';
+
+    if (isAuthenticated && (location == '/login' || location == '/')) {
+      return '/home';
+    }
+
     return null;
   }
 
@@ -42,10 +49,15 @@ final appRouterProvider = Provider<GoRouter>((ref) {
   final notifier = ref.read(routerNotifierProvider.notifier);
 
   return GoRouter(
-    initialLocation: '/login',
+    initialLocation: '/',
     refreshListenable: notifier,
     redirect: notifier.redirect,
     routes: [
+      GoRoute(
+        path: '/',
+        name: 'splash',
+        builder: (context, state) => const SplashPage(),
+      ),
       GoRoute(
         path: '/login',
         name: 'login',

@@ -18,13 +18,16 @@ class AuthRepositoryImp implements AuthRepository {
   }
 
   @override
-  void logout() {
-    // Implementa la lógica de cierre de sesión aquí
-    // Por ejemplo, puedes limpiar los datos del usuario activo o cerrar la sesión en el servicio de autenticación
-  }
+  void logout() {}
 
   @override
   UsuarioModel getUsuarioActivo() {
     return UsuarioModel.empty();
+  }
+
+  @override
+  UsuarioModel getUsuarioById(String id) {
+    return usuariosMock.where((u) => u.id == id).firstOrNull ??
+        UsuarioModel.empty();
   }
 }
