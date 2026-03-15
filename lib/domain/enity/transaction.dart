@@ -32,4 +32,26 @@ class TransaccionModel {
     this.metodo,
     required this.fecha,
   });
+
+  TransaccionModel copyWith({
+    String? id,
+    int? fondoId,
+    String? nombreFondo,
+    CategoriaFondo? categoriaFondo,
+    double? monto,
+    TipoTransaccion? tipo,
+    MetodoNotificacion? metodo,
+    DateTime? fecha,
+  }) {
+    return TransaccionModel(
+      id: id ?? this.id,
+      fondoId: fondoId ?? this.fondoId,
+      nombreFondo: nombreFondo ?? this.nombreFondo,
+      categoriaFondo: categoriaFondo ?? this.categoriaFondo,
+      monto: monto ?? this.monto,
+      tipo: tipo ?? this.tipo,
+      metodo: metodo ?? this.metodo,
+      fecha: fecha ?? this.fecha,
+    );
+  }
 }

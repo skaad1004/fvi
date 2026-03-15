@@ -22,7 +22,8 @@ class FondosRepositoryImp implements FondosRepository {
   }
 
   @override
-  Future<void> unsuscribeFondo(String fondoId) {
-    throw UnimplementedError();
+  Future<void> unsuscribeFondo(String fondoId) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return;
   }
 }

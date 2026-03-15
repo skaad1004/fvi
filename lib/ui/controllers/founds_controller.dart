@@ -97,4 +97,39 @@ class FoundsController extends StateNotifier<FoundsState> {
       state = state.copyWith(error: e.toString());
     }
   }
+
+  Future<void> unsubscribeFondo(String trasactionId) async {
+    try {
+      await _foundsRepository.unsuscribeFondo(trasactionId);
+      // buscar la transacción en el historial para obtener el monto y devolverlo al usuario
+      // cambiar el estado de suscrito a no suscrito
+      final transaccion = state.historial.firstWhere(
+        (t) =>
+            t.id.toString() == trasactionId &&
+            t.tipo == TipoTransaccion.suscripcion,
+        orElse: () => throw Exception('Transacción no encontrada'),
+      );
+
+      await _ref
+          .read(authControllerProvider.notifier)
+          .updateSaldo(transaccion.monto);
+      logger.log(
+        "FoundsController: unsubscribeFondo() llamado, monto devuelto: ${transaccion.monto}",
+      );
+
+      state = state.copyWith(
+        suscritos: state.suscritos
+            .where((f) => f.id.toString() != trasactionId)
+            .toList(),
+        historial: state.historial.map((t) {
+          if (t.id.toString() == trasactionId) {
+            return t.copyWith(tipo: TipoTransaccion.cancelacion);
+          }
+          return t;
+        }).toList(),
+      );
+    } catch (e) {
+      state = state.copyWith(error: e.toString());
+    }
+  }
 }
