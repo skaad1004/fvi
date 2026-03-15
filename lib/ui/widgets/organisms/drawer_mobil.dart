@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpv_fic/ui/main/app_colors.dart';
 import 'package:fpv_fic/ui/providers/auth_providers.dart';
 import 'package:fpv_fic/ui/router/app_router.dart';
+import 'package:fpv_fic/ui/utils/money_formater.dart';
 import 'package:fpv_fic/ui/widgets/atoms/fpv_text.dart';
 import 'package:fpv_fic/ui/widgets/atoms/version_app.dart';
 
@@ -38,9 +39,9 @@ class DrawerMobil extends ConsumerWidget {
           // Saldo
           ListTile(
             leading: const Icon(Icons.account_balance_wallet),
-            title: const Text('Saldo disponible'),
+            title: FPVText(text: 'Saldo disponible'),
             subtitle: FPVText(
-              text: 'COP \$${state.usuario.saldo.toStringAsFixed(0)}',
+              text: MoneyUtils.formatMoney(state.usuario.saldo, "COP"),
             ).color(AppColors.primary).bold(),
           ),
           const Divider(),
@@ -48,7 +49,7 @@ class DrawerMobil extends ConsumerWidget {
           // Navegación
           ListTile(
             leading: const Icon(Icons.dashboard),
-            title: const Text('Fondos'),
+            title: FPVText(text: 'Fondos'),
             // onTap: () => Navigator.pop(context),
             onTap: () {
               Navigator.pop(context);
@@ -57,7 +58,7 @@ class DrawerMobil extends ConsumerWidget {
           ),
           ListTile(
             leading: const Icon(Icons.history),
-            title: const Text('Historial'),
+            title: FPVText(text: 'Historial'),
             onTap: () {
               Navigator.pop(context);
               context.goIfNotCurrent('/home/transactions');
