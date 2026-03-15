@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpv_fic/ui/pages/home.dart';
 import 'package:fpv_fic/ui/pages/login.dart';
 import 'package:fpv_fic/ui/pages/splash.dart';
+import 'package:fpv_fic/ui/pages/transaction.dart';
 import 'package:fpv_fic/ui/providers/auth_providers.dart';
 import 'package:go_router/go_router.dart';
 
@@ -78,7 +79,27 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           name: 'Home - BTG',
           child: const HomePage(),
         ),
+        routes: [
+          GoRoute(
+            path: 'transactions',
+            name: 'transactions',
+            pageBuilder: (context, state) => MaterialPage(
+              key: state.pageKey,
+              name: 'Transactions - BTG',
+              child: const TransactionPage(),
+            ),
+          ),
+        ],
       ),
     ],
   );
 });
+
+extension GoRouterExtension on BuildContext {
+  void goIfNotCurrent(String path) {
+    final current = GoRouterState.of(this).uri.toString();
+    if (current != path) {
+      push(path);
+    }
+  }
+}

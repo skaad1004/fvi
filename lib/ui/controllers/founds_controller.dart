@@ -93,7 +93,6 @@ class FoundsController extends StateNotifier<FoundsState> {
 
       // Simular Historial
       state = state.copyWith(historial: [transaccion, ...state.historial]);
-      await loadFounds();
     } catch (e) {
       state = state.copyWith(error: e.toString());
     }
