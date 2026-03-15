@@ -51,6 +51,7 @@ class LoginFormState extends ConsumerState<LoginForm> {
               prefixIcon: Icon(Icons.email_outlined),
               border: OutlineInputBorder(),
             ),
+            keyboardType: TextInputType.emailAddress,
             validator: (v) =>
                 v == null || !v.contains('@') ? 'Email inválido' : null,
           ),
