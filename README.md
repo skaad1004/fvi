@@ -56,5 +56,5 @@ Esto te permitirá acceder a la aplicación desde cualquier dispositivo conectad
 ![Home Web](screenshot/Captura%20de%20pantalla%202026-03-15%20105326.png)
 ### Vista Mobile
 ![Mobile](screenshot/WhatsApp%20Image%202026-03-15%20at%2010.52.11%20(1).jpeg)
-![Mobile](screenshot/WhatsApp%20Image%202026-03-15%20at%2010.52.11%20(2).jpeg)
+![Mobile](screenshot/WhatsApp%20Image%202026-03-15%20at%2010.52.11%20.jpeg)
 
