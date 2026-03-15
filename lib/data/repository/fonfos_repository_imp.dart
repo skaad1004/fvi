@@ -16,8 +16,9 @@ class FondosRepositoryImp implements FondosRepository {
   }
 
   @override
-  Future<void> suscribeFondo(String fondoId, MetodoNotificacion metodo) {
-    throw UnimplementedError();
+  Future<void> suscribeFondo(String fondoId, MetodoNotificacion metodo) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return;
   }
 
   @override

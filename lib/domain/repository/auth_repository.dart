@@ -5,4 +5,5 @@ abstract class AuthRepository {
   void logout();
   UsuarioModel getUsuarioActivo();
   UsuarioModel getUsuarioById(String id);
+  Future<void> updateSaldo(double d);
 }

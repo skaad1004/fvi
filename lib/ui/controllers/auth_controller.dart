@@ -99,4 +99,10 @@ class AuthController extends StateNotifier<AuthState> {
     await _sessionRepository.clearSession();
     state = state.copyWith(isRestoring: false);
   }
+
+  Future<void> updateSaldo(double saldo) async {
+    await _authRepository.updateSaldo(saldo);
+    final usuarioActualizado = _authRepository.getUsuarioActivo();
+    state = state.copyWith(usuario: usuarioActualizado);
+  }
 }

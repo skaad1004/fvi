@@ -8,7 +8,7 @@ class UsuarioModel {
   final String email;
   final String telefono;
   final String password;
-  double saldo;
+  final double saldo;
   List<int> fondosSuscritos;
 
   // Constructor principal → para los mocks
@@ -39,4 +39,24 @@ class UsuarioModel {
       password = map.getString('password'),
       saldo = map.getDouble('saldo'),
       fondosSuscritos = List<int>.from(map.getList('fondosSuscritos'));
+
+  UsuarioModel copyWith({
+    String? id,
+    String? nombre,
+    String? email,
+    String? telefono,
+    String? password,
+    double? saldo,
+    List<int>? fondosSuscritos,
+  }) {
+    return UsuarioModel(
+      id: id ?? this.id,
+      nombre: nombre ?? this.nombre,
+      email: email ?? this.email,
+      telefono: telefono ?? this.telefono,
+      password: password ?? this.password,
+      saldo: saldo ?? this.saldo,
+      fondosSuscritos: fondosSuscritos ?? this.fondosSuscritos,
+    );
+  }
 }

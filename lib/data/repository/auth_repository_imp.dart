@@ -3,6 +3,7 @@ import 'package:fpv_fic/domain/enity/usuario.dart';
 import 'package:fpv_fic/domain/repository/auth_repository.dart';
 
 class AuthRepositoryImp implements AuthRepository {
+  UsuarioModel? _usuarioActivo;
   @override
   Future<(UsuarioModel, String?)> login(String email, String password) async {
     await Future.delayed(Duration(seconds: 2));
@@ -11,6 +12,7 @@ class AuthRepositoryImp implements AuthRepository {
         .firstOrNull;
 
     if (usuario != null) {
+      _usuarioActivo = usuario;
       return (usuario, null);
     }
 
@@ -18,16 +20,28 @@ class AuthRepositoryImp implements AuthRepository {
   }
 
   @override
-  void logout() {}
+  void logout() {
+    _usuarioActivo = null;
+  }
 
   @override
   UsuarioModel getUsuarioActivo() {
-    return UsuarioModel.empty();
+    return _usuarioActivo ?? UsuarioModel.empty();
   }
 
   @override
   UsuarioModel getUsuarioById(String id) {
-    return usuariosMock.where((u) => u.id == id).firstOrNull ??
-        UsuarioModel.empty();
+    final usuario = usuariosMock.where((u) => u.id == id).firstOrNull;
+    if (usuario != null) {
+      _usuarioActivo = usuario;
+    }
+    return usuario ?? UsuarioModel.empty();
+  }
+
+  @override
+  Future<void> updateSaldo(double monto) async {
+    await Future.delayed(const Duration(seconds: 1));
+    final usuario = getUsuarioActivo();
+    _usuarioActivo = usuario.copyWith(saldo: usuario.saldo + monto);
   }
 }
