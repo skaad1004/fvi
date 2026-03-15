@@ -171,11 +171,7 @@ class _FondoCardState extends ConsumerState<FondoCard> {
 
                             Navigator.pop(context);
 
-                            _suscribeFondo(
-                              widget.fondo.id.toString(),
-                              metodo,
-                              monto,
-                            );
+                            _suscribeFondo(widget.fondo, metodo, monto);
                           },
                     child: const Text('Confirmar'),
                   )
@@ -228,7 +224,7 @@ class _FondoCardState extends ConsumerState<FondoCard> {
   }
 
   Future<void> _suscribeFondo(
-    String fondoId,
+    FondoModel fondo,
     MetodoNotificacion metodo,
     double monto,
   ) async {
@@ -236,7 +232,7 @@ class _FondoCardState extends ConsumerState<FondoCard> {
       context: context,
       process: ref
           .read(foundsControllerProvider.notifier)
-          .suscribeFondo(fondoId, metodo, monto),
+          .suscribeFondo(fondo, metodo, monto),
       callback: (_) {},
     );
   }

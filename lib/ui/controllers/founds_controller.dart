@@ -3,9 +3,7 @@ import 'package:flutter_riverpod/legacy.dart';
 import 'package:fpv_fic/data/logger_interface.dart';
 import 'package:fpv_fic/domain/enity/fondo.dart';
 import 'package:fpv_fic/domain/enity/transaction.dart';
-import 'package:fpv_fic/domain/repository/auth_repository.dart';
 import 'package:fpv_fic/domain/repository/fondos_repository.dart';
-import 'package:fpv_fic/domain/use_case/fondos/get_fondos_use_case.dart';
 import 'package:fpv_fic/ui/providers/auth_providers.dart';
 
 class FoundsState {
@@ -63,7 +61,7 @@ class FoundsController extends StateNotifier<FoundsState> {
   }
 
   Future<void> suscribeFondo(
-    String fondoId,
+    FondoModel fondo,
     MetodoNotificacion metodo,
     double monto,
   ) async {
@@ -73,11 +71,28 @@ class FoundsController extends StateNotifier<FoundsState> {
         state = state.copyWith(error: 'Saldo insuficiente para suscribirse');
         return;
       }
-      await _foundsRepository.suscribeFondo(fondoId, metodo);
+      await _foundsRepository.suscribeFondo(fondo.id.toString(), metodo);
       await _ref.read(authControllerProvider.notifier).updateSaldo(-monto);
       logger.log(
         "FoundsController: suscribeFondo() llamado, monto descontado: $monto",
       );
+
+      final transaccion = TransaccionModel(
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        fondoId: fondo.id,
+        nombreFondo: fondo.nombre,
+        categoriaFondo: CategoriaFondo.values.firstWhere(
+          (cat) => cat.value == fondo.categoria,
+          orElse: () => CategoriaFondo.fvp,
+        ),
+        monto: monto,
+        tipo: TipoTransaccion.suscripcion,
+        metodo: metodo,
+        fecha: DateTime.now(),
+      );
+
+      // Simular Historial
+      state = state.copyWith(historial: [transaccion, ...state.historial]);
       await loadFounds();
     } catch (e) {
       state = state.copyWith(error: e.toString());
