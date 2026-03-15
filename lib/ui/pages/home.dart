@@ -6,6 +6,7 @@ import 'package:fpv_fic/ui/pages/mobil/home_mobil.dart';
 import 'package:fpv_fic/ui/pages/web/home_web.dart';
 import 'package:fpv_fic/ui/providers/auth_providers.dart';
 import 'package:fpv_fic/ui/providers/founds_providers.dart';
+import 'package:fpv_fic/ui/utils/dialogs.dart';
 import 'package:fpv_fic/ui/utils/money_formater.dart';
 import 'package:fpv_fic/ui/utils/responsive.dart';
 import 'package:fpv_fic/ui/widgets/atoms/fpv_text.dart';
@@ -74,7 +75,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                 IconButton(
                   icon: const Icon(Icons.logout),
                   tooltip: 'Cerrar sesión',
-                  onPressed: () => controller.logout(),
+                  onPressed: () => _logout(context),
                 ),
                 const SizedBox(width: 8),
               ],
@@ -83,6 +84,18 @@ class _HomePageState extends ConsumerState<HomePage> {
           ? const HomeMobileLayout()
           : HomeWebLayout(sidebarOpen: _sidebarOpen),
       drawer: isMobile ? const DrawerWeb() : null,
+    );
+  }
+
+  Future<void> _logout(BuildContext context) {
+    return DialogsInfo.confirmDialog(
+      context,
+      title: '¿Cerrar sesión?',
+      message: '¿Estás seguro de que quieres cerrar sesión?',
+      confirmText: 'Cerrar sesión',
+      onConfirm: () {
+        ref.read(authControllerProvider.notifier).logout();
+      },
     );
   }
 }
