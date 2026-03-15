@@ -9,7 +9,7 @@ class UsuarioModel {
   final String telefono;
   final String password;
   final double saldo;
-  List<int> fondosSuscritos;
+  List<int> fondosSuscritos; //TODO: refactor
 
   // Constructor principal → para los mocks
   UsuarioModel({
