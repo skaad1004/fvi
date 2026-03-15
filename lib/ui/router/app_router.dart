@@ -10,6 +10,8 @@ final routerNotifierProvider = NotifierProvider<RouterNotifier, void>(
   RouterNotifier.new,
 );
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 class RouterNotifier extends Notifier<void> implements Listenable {
   final List<VoidCallback> _listeners = [];
 
@@ -49,6 +51,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
   final notifier = ref.read(routerNotifierProvider.notifier);
 
   return GoRouter(
+    navigatorKey: navigatorKey,
     initialLocation: '/',
     refreshListenable: notifier,
     redirect: notifier.redirect,

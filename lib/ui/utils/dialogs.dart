@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fpv_fic/ui/router/app_router.dart';
 
 class DialogsInfo {
   static Future<T> show<T>({
@@ -8,7 +9,7 @@ class DialogsInfo {
     String? title,
     ValueSetter<T>? callback,
   }) async {
-    var onComplete = () {};
+    void onComplete() {}
 
     // ignore: unawaited_futures
     _showDialogLoading(context, title).then((_) {
@@ -17,14 +18,9 @@ class DialogsInfo {
 
     final result = await process;
 
-    onComplete = () {
-      if (callback != null) {
-        callback(result);
-      }
-    };
+    navigatorKey.currentState?.pop();
 
-    // ignore: use_build_context_synchronously
-    Navigator.of(context).pop(result);
+    callback?.call(result);
 
     return result;
   }
@@ -33,13 +29,16 @@ class DialogsInfo {
     return showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        content: Row(
-          children: [
-            const CircularProgressIndicator(),
-            const SizedBox(width: 16),
-            Expanded(child: Text(title ?? 'Cargando...')),
-          ],
+      builder: (context) => PopScope(
+        canPop: false,
+        child: AlertDialog(
+          content: Row(
+            children: [
+              const CircularProgressIndicator(),
+              const SizedBox(width: 16),
+              Expanded(child: Text(title ?? 'Cargando...')),
+            ],
+          ),
         ),
       ),
     );
@@ -72,7 +71,7 @@ class DialogsInfo {
               icon: cancelIcon ?? const Icon(Icons.cancel),
               label: Text(cancelText ?? 'Cancelar'),
             ),
-          TextButton.icon(
+          ElevatedButton.icon(
             onPressed: () {
               Navigator.of(context).pop(true);
               onConfirm();

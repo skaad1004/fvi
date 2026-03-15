@@ -45,7 +45,6 @@ class _HomePageState extends ConsumerState<HomePage> {
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
-        // 👇 reemplaza el leading por defecto
         leading: IconButton(
           icon: const Icon(Icons.account_balance),
           tooltip: isMobile ? 'Menú' : 'Colapsar menú',
