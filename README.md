@@ -43,14 +43,18 @@ Esto te permitirá acceder a la aplicación desde cualquier dispositivo conectad
 
 ## 📸 Capturas de pantalla
 
+
+
+
+
+
+
 ### Login
 
-![Login](screenshot/Captura de pantalla 2026-03-15 104944.png)
-
+![Login](screenshot/Captura%20de%20pantalla%202026-03-15%20104944.png)
 ### Home - Vista Web
-![Home Web](screenshot/Captura de pantalla 2026-03-15 105326.png)
-
+![Home Web](screenshot/Captura%20de%20pantalla%202026-03-15%20105326.png)
 ### Vista Mobile
-![Mobile](screenshot/WhatsApp Image 2026-03-15 at 10.52.11 (1).jpeg)
-![Mobile](screenshot/WhatsApp Image 2026-03-15 at 10.52.11.jpeg)
+![Mobile](screenshot/WhatsApp%20Image%202026-03-15%20at%2010.52.11%20(1).jpeg)
+![Mobile](screenshot/WhatsApp%20Image%202026-03-15%20at%2010.52.11%20(2).jpeg)
 
