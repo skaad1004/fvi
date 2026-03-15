@@ -6,7 +6,9 @@ import 'package:fpv_fic/ui/pages/mobil/home_mobil.dart';
 import 'package:fpv_fic/ui/pages/web/home_web.dart';
 import 'package:fpv_fic/ui/providers/auth_providers.dart';
 import 'package:fpv_fic/ui/providers/founds_providers.dart';
+import 'package:fpv_fic/ui/utils/money_formater.dart';
 import 'package:fpv_fic/ui/utils/responsive.dart';
+import 'package:fpv_fic/ui/widgets/atoms/fpv_text.dart';
 import 'package:fpv_fic/ui/widgets/organisms/drawer_web.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -61,10 +63,13 @@ class _HomePageState extends ConsumerState<HomePage> {
         actions: isMobile
             ? null
             : [
-                Text(
-                  state.usuario.nombre,
-                  style: const TextStyle(fontSize: 14),
-                ),
+                FPVText(
+                  text: MoneyUtils.formatMoney(state.usuario.saldo, 'COP'),
+                ).color(Colors.white).s16().bold(),
+                const SizedBox(width: 16),
+                FPVText(
+                  text: state.usuario.nombre,
+                ).color(Colors.white).s16().bold(),
                 const SizedBox(width: 8),
                 IconButton(
                   icon: const Icon(Icons.logout),
