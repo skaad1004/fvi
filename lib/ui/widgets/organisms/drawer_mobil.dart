@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpv_fic/ui/main/app_colors.dart';
 import 'package:fpv_fic/ui/providers/auth_providers.dart';
+import 'package:fpv_fic/ui/router/app_router.dart';
 import 'package:fpv_fic/ui/widgets/atoms/fpv_text.dart';
+import 'package:fpv_fic/ui/widgets/atoms/version_app.dart';
 
-class DrawerWeb extends ConsumerWidget {
-  const DrawerWeb({super.key});
+class DrawerMobil extends ConsumerWidget {
+  const DrawerMobil({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -47,16 +49,23 @@ class DrawerWeb extends ConsumerWidget {
           ListTile(
             leading: const Icon(Icons.dashboard),
             title: const Text('Fondos'),
-            onTap: () => Navigator.pop(context),
+            // onTap: () => Navigator.pop(context),
+            onTap: () {
+              Navigator.pop(context);
+              context.goIfNotCurrent('/home');
+            },
           ),
           ListTile(
             leading: const Icon(Icons.history),
             title: const Text('Historial'),
-            onTap: () => Navigator.pop(context),
+            onTap: () {
+              Navigator.pop(context);
+              context.goIfNotCurrent('/home/transactions');
+            },
           ),
           const Spacer(),
+          AboutWidget(),
           const Divider(),
-
           // Logout
           ListTile(
             leading: const Icon(Icons.logout, color: Colors.red),

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpv_fic/ui/pages/mobil/home_mobil.dart';
+import 'package:fpv_fic/ui/pages/mobil/tracsaction_mobil.dart';
 import 'package:fpv_fic/ui/pages/web/layout_web.dart';
 import 'package:fpv_fic/ui/pages/web/transaction_web.dart';
 import 'package:fpv_fic/ui/providers/ui_providers.dart';
 import 'package:fpv_fic/ui/utils/responsive.dart';
 import 'package:fpv_fic/ui/widgets/atoms/appbar.dart';
-import 'package:fpv_fic/ui/widgets/organisms/drawer_web.dart';
+import 'package:fpv_fic/ui/widgets/organisms/drawer_mobil.dart';
 
 class TransactionPage extends ConsumerStatefulWidget {
   const TransactionPage({super.key});
@@ -24,12 +25,12 @@ class _TransactionPageState extends ConsumerState<TransactionPage> {
     return Scaffold(
       appBar: AppBarCustom(),
       body: isMobile
-          ? const HomeMobileLayout()
+          ? const TransactionMobile()
           : LayoutWeb(
               sidebarOpen: stateSidebar,
               content: const TransactionWebLayout(),
             ),
-      drawer: isMobile ? const DrawerWeb() : null,
+      drawer: isMobile ? const DrawerMobil() : null,
     );
   }
 }
