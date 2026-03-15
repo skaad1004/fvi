@@ -41,4 +41,16 @@ http://192.168.x.x:8080
 ```
 Esto te permitirá acceder a la aplicación desde cualquier dispositivo conectado a la misma red local.
 
+## 📸 Capturas de pantalla
+
+### Login
+
+![Login](screenshot/Captura de pantalla 2026-03-15 104944.png)
+
+### Home - Vista Web
+![Home Web](screenshot/Captura de pantalla 2026-03-15 105326.png)
+
+### Vista Mobile
+![Mobile](screenshot/WhatsApp Image 2026-03-15 at 10.52.11 (1).jpeg)
+![Mobile](screenshot/WhatsApp Image 2026-03-15 at 10.52.11.jpeg)
 
