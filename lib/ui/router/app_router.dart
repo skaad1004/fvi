@@ -99,7 +99,7 @@ extension GoRouterExtension on BuildContext {
   void goIfNotCurrent(String path) {
     final current = GoRouterState.of(this).uri.toString();
     if (current != path) {
-      push(path);
+      go(path);
     }
   }
 }

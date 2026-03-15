@@ -79,7 +79,6 @@ class _ListTransactionState extends ConsumerState<ListTransaction> {
       confirmText: 'Eliminar',
       cancelText: 'Cancelar',
       onConfirm: () {
-        Navigator.of(context).pop();
         DialogsInfo.show(
           context: context,
           process: ref
