@@ -41,12 +41,15 @@ http://192.168.x.x:8080
 ```
 Esto te permitirá acceder a la aplicación desde cualquier dispositivo conectado a la misma red local.
 
+## 🙍‍♂️ Usuarios
+- **Usuario 1**: carlos@btg.com
+  - Contraseña: 1234
+
+- **Usuario 2**: maria@btg.com
+  - Contraseña: 5678
+
+
 ## 📸 Capturas de pantalla
-
-
-
-
-
 
 
 ### Login
